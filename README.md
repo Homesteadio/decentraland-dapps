@@ -1,30 +1,30 @@
-![](https://ui.decentraland.org/decentraland_128x128.png)
+Orignally forked from `Decentraland`, merged with `hxMLS`
 
-# Decentraland dApps
+# Homestead dApps
 
 Common modules for our dApps
 
 # Table of Contents
 
-- [Modules](https://github.com/decentraland/decentraland-dapps#modules)
-  - [Wallet](https://github.com/decentraland/decentraland-dapps#wallet)
-  - [Storage](https://github.com/decentraland/decentraland-dapps#storage)
-  - [Transaction](https://github.com/decentraland/decentraland-dapps#transaction)
-  - [Translation](https://github.com/decentraland/decentraland-dapps#translation)
-  - [Analytics](https://github.com/decentraland/decentraland-dapps#analytics)
-  - [Loading](https://github.com/decentraland/decentraland-dapps#loading)
-  - [Modal](https://github.com/decentraland/decentraland-dapps#modal)
-- [Lib](https://github.com/decentraland/decentraland-dapps#lib)
-  - [API](https://github.com/decentraland/decentraland-dapps#api)
-- [Containers](https://github.com/decentraland/decentraland-dapps#containers)
-  - [App](https://github.com/decentraland/decentraland-dapps#app)
-  - [Navbar](https://github.com/decentraland/decentraland-dapps#navbar)
-  - [Footer](https://github.com/decentraland/decentraland-dapps#footer)
-  - [SignInPage](https://github.com/decentraland/decentraland-dapps#signinpage)
-  - [Modal](https://github.com/decentraland/decentraland-dapps#modal)
-  - [EtherscanLink](https://github.com/decentraland/decentraland-dapps#etherscanlink)
-- [Components](https://github.com/decentraland/decentraland-dapps#components)
-  - [Intercom](https://github.com/decentraland/decentraland-dapps#intercom)
+- [Modules](https://github.com/decentraland/homesteadio-dapps#modules)
+  - [Wallet](https://github.com/decentraland/homesteadio-dapps#wallet)
+  - [Storage](https://github.com/decentraland/homesteadio-dapps#storage)
+  - [Transaction](https://github.com/decentraland/homesteadio-dapps#transaction)
+  - [Translation](https://github.com/decentraland/homesteadio-dapps#translation)
+  - [Analytics](https://github.com/decentraland/homesteadio-dapps#analytics)
+  - [Loading](https://github.com/decentraland/homesteadio-dapps#loading)
+  - [Modal](https://github.com/decentraland/homesteadio-dapps#modal)
+- [Lib](https://github.com/decentraland/homesteadio-dapps#lib)
+  - [API](https://github.com/decentraland/homesteadio-dapps#api)
+- [Containers](https://github.com/decentraland/homesteadio-dapps#containers)
+  - [App](https://github.com/decentraland/homesteadio-dapps#app)
+  - [Navbar](https://github.com/decentraland/homesteadio-dapps#navbar)
+  - [Footer](https://github.com/decentraland/homesteadio-dapps#footer)
+  - [SignInPage](https://github.com/decentraland/homesteadio-dapps#signinpage)
+  - [Modal](https://github.com/decentraland/homesteadio-dapps#modal)
+  - [EtherscanLink](https://github.com/decentraland/homesteadio-dapps#etherscanlink)
+- [Components](https://github.com/decentraland/homesteadio-dapps#components)
+  - [Intercom](https://github.com/decentraland/homesteadio-dapps#intercom)
 
 # Modules
 
@@ -36,7 +36,7 @@ This module takes care of connecting to MetaMask/Ledger, and insert in the state
 
 ### Usage
 
-You can use the following selectors importing them from `decentraland-dapps/dist/modules/wallet/selectors`:
+You can use the following selectors importing them from `homesteadio-dapps/dist/modules/wallet/selectors`:
 
 ```tsx
 getData = (state: State) => BaseWallet
@@ -48,7 +48,7 @@ isConnected = (state: State) => boolean
 isConnecting = (state: State) => boolean
 ```
 
-Also you can hook to the following actions from your reducers/sagas by importing them from `decentraland-dapps/dist/modules/wallet/actions`:
+Also you can hook to the following actions from your reducers/sagas by importing them from `homesteadio-dapps/dist/modules/wallet/actions`:
 
 ```tsx
 CONNECT_WALLET_REQUEST
@@ -71,7 +71,7 @@ This is an example of how you can wait for the `CONNECT_WALLET_SUCCESS` action t
 import {
   CONNECT_WALLET_SUCCESS,
   ConnectWalletSuccessAction
-} from 'decentraland-dapps/dist/modules/wallet/actions'
+} from 'homesteadio-dapps/dist/modules/wallet/actions'
 import { fetchSomethingRequest } from './actions'
 
 export function* saga() {
@@ -96,7 +96,7 @@ import * as React from 'react'
 import * as ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import { ConnectedRouter } from 'connected-react-router'
-import WalletProvider from 'decentraland-dapps/dist/providers/WalletProvider'
+import WalletProvider from 'homesteadio-dapps/dist/providers/WalletProvider'
 import { store, history } from './store'
 
 ReactDOM.render(
@@ -115,7 +115,7 @@ Import the `walletReducer` and add it at the root level of your dApp's reducer a
 
 ```ts
 import { combineReducers } from 'redux'
-import { walletReducer as wallet } from 'decentraland-dapps/dist/modules/wallet/reducer'
+import { walletReducer as wallet } from 'homesteadio-dapps/dist/modules/wallet/reducer'
 
 export const rootReducer = combineReducers({
   wallet
@@ -129,7 +129,7 @@ You will need to create a `walletSaga` and add it to your `rootSaga`:
 
 ```ts
 import { all } from 'redux-saga/effects'
-import { walletSaga } from 'decentraland-dapps/dist/modules/wallet/sagas'
+import { walletSaga } from 'homesteadio-dapps/dist/modules/wallet/sagas'
 
 export function* rootSaga() {
   yield all([
@@ -155,7 +155,7 @@ You will need to create a `storageMiddleware` and add apply it along with your o
 ```ts
 // store.ts
 import { applyMiddleware, compose, createStore } from 'redux'
-import { createStorageMiddleware } from 'decentraland-dapps/dist/modules/storage/middleware'
+import { createStorageMiddleware } from 'homesteadio-dapps/dist/modules/storage/middleware'
 import { migrations } from './migrations'
 
 const composeEnhancers =
@@ -211,7 +211,7 @@ import { combineReducers } from 'redux'
 import {
   storageReducer as storage,
   storageReducerWrapper
-} from 'decentraland-dapps/dist/modules/storage/reducer'
+} from 'homesteadio-dapps/dist/modules/storage/reducer'
 
 export const rootReducer = storageReducerWrapper(
   combineReducers({
@@ -255,7 +255,7 @@ The transaction module allows you to watch for pending transactions and keep tra
 
 ### Dependencies
 
-This module requires you to install the [Storage](https://github.com/decentraland/decentraland-dapps#storage) module in order to work.
+This module requires you to install the [Storage](https://github.com/decentraland/homesteadio-dapps#storage) module in order to work.
 
 ### Usage
 
@@ -263,7 +263,7 @@ When you have an action that creates a transaction and you want to watch it, you
 
 ```ts
 import { action } from 'typesafe-actions'
-import { buildTransactionPayload } from 'decentraland-dapps/dist/modules/transaction/utils'
+import { buildTransactionPayload } from 'homesteadio-dapps/dist/modules/transaction/utils'
 
 // Send Invite
 
@@ -309,7 +309,7 @@ export const sendInvitesSuccess = (txHash: string, address: string) =>
 
 It will save the event logs inside `{ receipt: { logs: [] } }` after the tx was confirmed
 
-Then you can use the selectors `getPendingTransactions` and `getTransactionHistory` from `decentraland-dapps/dist/modules/transaction/selectors` to get the list of pending transactions and the transaction history.
+Then you can use the selectors `getPendingTransactions` and `getTransactionHistory` from `homesteadio-dapps/dist/modules/transaction/selectors` to get the list of pending transactions and the transaction history.
 
 ### Installation
 
@@ -321,7 +321,7 @@ Create the `transactionMiddleware` and apply it
 
 ```ts
 // store.ts
-import { createTransactionMiddleware } from 'decentraland-dapps/dist/modules/transaction/middleware'
+import { createTransactionMiddleware } from 'homesteadio-dapps/dist/modules/transaction/middleware'
 const transactionMiddleware = createTransactionMiddleware()
 
 const middleware = applyMiddleware(
@@ -336,7 +336,7 @@ Add `transactionReducer` as `transaction` to your `rootReducer`
 
 ```ts
 import { combineReducers } from 'redux'
-import { transactionReducer as transaction } from 'decentraland-dapps/dist/modules/transaction/reducer'
+import { transactionReducer as transaction } from 'homesteadio-dapps/dist/modules/transaction/reducer'
 
 export const rootReducer = combineReducers({
   transaction
@@ -350,7 +350,7 @@ Add `transactionSaga` to your `rootSaga`
 
 ```ts
 import { all } from 'redux-saga/effects'
-import { transactionSaga } from 'decentraland-dapps/dist/modules/transaction/sagas'
+import { transactionSaga } from 'homesteadio-dapps/dist/modules/transaction/sagas'
 
 export function* rootSaga() {
   yield all([
@@ -372,7 +372,7 @@ Taking the example of the `SEND_INVITE_SUCCESS` action type shown in the `Usage`
 ```diff
 // modules/invite/reducer
 import { AnyAction } from 'redux'
-import { loadingReducer } from 'decentraland-dapps/dist/modules/loading/reducer'
+import { loadingReducer } from 'homesteadio-dapps/dist/modules/loading/reducer'
 import {
   FETCH_INVITES_REQUEST,
   FETCH_INVITES_SUCCESS,
@@ -382,7 +382,7 @@ import {
   FetchInvitesRequestAction,
 +  SEND_INVITE_SUCCESS
 } from './actions'
-+ import { FETCH_TRANSACTION_SUCCESS, FetchTransactionSuccessAction } from 'decentraland-dapps/dist/modules/transaction/actions';
++ import { FETCH_TRANSACTION_SUCCESS, FetchTransactionSuccessAction } from 'homesteadio-dapps/dist/modules/transaction/actions';
 
 export type InviteState = {
   loading: AnyAction[]
@@ -465,7 +465,7 @@ This module allows you to do i18n.
 
 ### Dependencies
 
-This module has an optional dependency on [Storage](https://github.com/decentraland/decentraland-dapps#storage) module to cache translations and boot the application faster. To learn more read the `Advanced Usage` section of this module.
+This module has an optional dependency on [Storage](https://github.com/decentraland/homesteadio-dapps#storage) module to cache translations and boot the application faster. To learn more read the `Advanced Usage` section of this module.
 
 ### Usage
 
@@ -473,7 +473,7 @@ Using the helper `t()` you can add translations to your dApp
 
 ```tsx
 import * as React from 'react'
-import { t } from 'decentraland-dapps/dist/modules/translation/utils'
+import { t } from 'homesteadio-dapps/dist/modules/translation/utils'
 
 export default class BuyButton extends React.PureComponent {
   render() {
@@ -504,7 +504,7 @@ _es.json_
 }
 ```
 
-Yon can dispatch the `changeLocale(locale: string)` action from `decentraland-dapps/dist/modules/translation/actions` to change the language
+Yon can dispatch the `changeLocale(locale: string)` action from `homesteadio-dapps/dist/modules/translation/actions` to change the language
 
 ### Installation
 
@@ -519,7 +519,7 @@ import * as React from 'react'
 import * as ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import { ConnectedRouter } from 'connected-react-router'
-import TranslationProvider from 'decentraland-dapps/dist/providers/TranslationProvider'
+import TranslationProvider from 'homesteadio-dapps/dist/providers/TranslationProvider'
 import { store, history } from './store'
 
 ReactDOM.render(
@@ -538,7 +538,7 @@ Add the `translationReducer` as `translation` to your `rootReducer`:
 
 ```ts
 import { combineReducers } from 'redux'
-import { translationReducer as translation } from 'decentraland-dapps/dist/modules/translation/reducer'
+import { translationReducer as translation } from 'homesteadio-dapps/dist/modules/translation/reducer'
 
 export const rootReducer = combineReducers({
   translation
@@ -584,7 +584,7 @@ _sagas.ts_
 
 ```ts
 import { all } from 'redux-saga/effects'
-import { createTranslationSaga } from 'decentraland-dapps/dist/modules/translation/sagas'
+import { createTranslationSaga } from 'homesteadio-dapps/dist/modules/translation/sagas'
 import * as translations from './translations'
 
 export const translationSaga = createTranslationSaga({
@@ -605,7 +605,7 @@ _sagas.ts_
 
 ```ts
 import { all } from 'redux-saga/effects'
-import { createTranslationSaga } from 'decentraland-dapps/dist/modules/translation/sagas'
+import { createTranslationSaga } from 'homesteadio-dapps/dist/modules/translation/sagas'
 import { api } from 'lib/api'
 
 export const translationSaga = createTranslationSaga({
@@ -624,12 +624,12 @@ Read the `Advanced Usage` section below to learn how to cache translations and m
 
 ### Advanced Usage
 
-You can use the [Storage](https://github.com/decentraland/decentraland-dapps#storage) module to cache translations (read `2. Fetching translations from server` above).
+You can use the [Storage](https://github.com/decentraland/homesteadio-dapps#storage) module to cache translations (read `2. Fetching translations from server` above).
 
 <details><summary>Learn More</summary>
 <p>
 
-After [installing the Storage module](https://github.com/decentraland/decentraland-dapps#storage) you can persist the translations by adding `'translation'` to your storage middleware paths:
+After [installing the Storage module](https://github.com/decentraland/homesteadio-dapps#storage) you can persist the translations by adding `'translation'` to your storage middleware paths:
 
 ```ts
 // store.ts
@@ -655,7 +655,7 @@ To send `track` events, add an `analytics.ts` file and require it from your entr
 
 ```ts
 // analytics.ts
-import { add } from 'decentraland-dapps/dist/modules/analytics/utils'
+import { add } from 'homesteadio-dapps/dist/modules/analytics/utils'
 import {
   CREATE_VOTE_SUCCESS,
   CreateVoteSuccessAction
@@ -698,7 +698,7 @@ const store = createStore(rootReducer, enhancer)
 
 ```ts
 import { all } from 'redux-saga/effects'
-import { analyticsSaga } from 'decentraland-dapps/dist/modules/analytics/sagas'
+import { analyticsSaga } from 'homesteadio-dapps/dist/modules/analytics/sagas'
 
 export function* rootSaga() {
   yield all([
@@ -712,7 +712,7 @@ This uses by defualt the `'@@router/LOCATION_CHANGE'` action type to track page 
 
 ```ts
 import { all } from 'redux-saga/effects'
-import { createAnalyticsSaga } from 'decentraland-dapps/dist/modules/analytics/sagas'
+import { createAnalyticsSaga } from 'homesteadio-dapps/dist/modules/analytics/sagas'
 
 const analyticsSaga = createAnalyticsSaga({
   LOCATION_CHANGE: 'custom action type'
@@ -742,7 +742,7 @@ The loading module is used to keep track of async actions in the state.
 
 ### Usage
 
-You can use the selectors `isLoading(state)` and `isLoadingType(state, ACTION_TYPE)` from `decentraland-dapps/dist/modules/loading/selectors` to know if a domain has pending actions or if a specific action is still pending
+You can use the selectors `isLoading(state)` and `isLoadingType(state, ACTION_TYPE)` from `homesteadio-dapps/dist/modules/loading/selectors` to know if a domain has pending actions or if a specific action is still pending
 
 In order to use these selectors you need to use the `loadingReducer` within your domain reducers, here is an example:
 
@@ -750,7 +750,7 @@ In order to use these selectors you need to use the `loadingReducer` within your
 import {
   loadingReducer,
   LoadingState
-} from 'decentraland-dapps/dist/modules/loading/reducer'
+} from 'homesteadio-dapps/dist/modules/loading/reducer'
 import {
   FETCH_INVITES_REQUEST,
   FETCH_INVITES_SUCCESS,
@@ -848,7 +848,7 @@ import * as React from 'react'
 import * as ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import { ConnectedRouter } from 'connected-react-router'
-import ModalProvider from 'decentraland-dapps/dist/providers/ModalProvider'
+import ModalProvider from 'homesteadio-dapps/dist/providers/ModalProvider'
 import * as modals from 'components/Modals'
 import { store, history } from './store'
 
@@ -874,7 +874,7 @@ Each modal will receive the properties defined on the `ModalComponent` type, fou
 
 ```tsx
 import { Modal } from 'decentraland-ui'
-import { ModalProps } from 'decentraland-dapps/dist/modules/modal/types'
+import { ModalProps } from 'homesteadio-dapps/dist/modules/modal/types'
 
 type HelpModalProps = ModalProps & {
   // Some custom props, maybe from a container
@@ -890,7 +890,7 @@ export default class HelpModal extends React.Component<HelpModalProps> {
 }
 ```
 
-If want to use [decentraland-ui's Modal](https://github.com/decentraland/ui) but you don't want to repeat the `open`, `className` and `onClose` props, you can use this module's [Modal](https://github.com/decentraland/decentraland-dapps#modal)
+If want to use [decentraland-ui's Modal](https://github.com/decentraland/ui) but you don't want to repeat the `open`, `className` and `onClose` props, you can use this module's [Modal](https://github.com/decentraland/homesteadio-dapps#modal)
 
 **Reducer**:
 
@@ -898,7 +898,7 @@ Add the `modalReducer` as `modal` to your `rootReducer`:
 
 ```ts
 import { combineReducers } from 'redux'
-import { modalReducer as modal } from 'decentraland-dapps/dist/modules/modal/reducer'
+import { modalReducer as modal } from 'homesteadio-dapps/dist/modules/modal/reducer'
 
 export const rootReducer = combineReducers({
   modal
@@ -927,12 +927,12 @@ export ModalName = keyof typeof modals
 
 ```ts
 // modules/modal/actions.ts
-import { getModalActions } from 'decentraland-dapps/dist/modules/modal/actions'
+import { getModalActions } from 'homesteadio-dapps/dist/modules/modal/actions'
 import { ModalName } from './types'
 
 const { openModal, closeModal, toggleModal } = getModalActions<ModalName>()
 
-export * from 'decentraland-dapps/dist/modules/modal/actions'
+export * from 'homesteadio-dapps/dist/modules/modal/actions'
 export { openModal, closeModal, toggleModal }
 ```
 
@@ -951,7 +951,7 @@ The `BaseAPI` class can be extended to make requests and it handles the unwrappi
 
 ```ts
 // lib/api
-import { BaseAPI } from 'decentraland-dapps/dist/lib/api'
+import { BaseAPI } from 'homesteadio-dapps/dist/lib/api'
 
 const URL = 'http://localhost/api'
 
@@ -974,7 +974,7 @@ The `<Navbar>` container can be used in the same way as the `<Navbar>` component
 
 ### Dependencies
 
-This container requires you to install the [Wallet](https://github.com/decentraland/decentraland-dapps#wallet). It also has support for i18n out of the box if you include the [Translation](https://github.com/decentraland/decentraland-dapps#translation) module.
+This container requires you to install the [Wallet](https://github.com/decentraland/homesteadio-dapps#wallet). It also has support for i18n out of the box if you include the [Translation](https://github.com/decentraland/homesteadio-dapps#translation) module.
 
 ### Usage
 
@@ -984,7 +984,7 @@ This is an example of a `SomePage` component that uses the `<Navbar>` container:
 import * as React from 'react'
 
 import { Container } from 'decentraland-ui'
-import Navbar from 'decentraland-dapps/dist/containers/Navbar'
+import Navbar from 'homesteadio-dapps/dist/containers/Navbar'
 
 import './SomePage.css'
 
@@ -1012,7 +1012,7 @@ This `<Navbar>` will show the user's blockie and mana balance because it is conn
 
 ### i18n
 
-If you are using the [Translation](https://github.com/decentraland/decentraland-dapps#translation) module, the `Navbar` contatiner comes with support for the 6 languages supported by the library.
+If you are using the [Translation](https://github.com/decentraland/homesteadio-dapps#translation) module, the `Navbar` contatiner comes with support for the 6 languages supported by the library.
 
 ### Advanced Usage
 
@@ -1051,7 +1051,7 @@ The `<Footer>` container can be used in the same way as the `<Footer>` component
 
 ### Dependencies
 
-The `<Footer>` container has support for i18n out of the box if you include the [Translation](https://github.com/decentraland/decentraland-dapps#translation) module.
+The `<Footer>` container has support for i18n out of the box if you include the [Translation](https://github.com/decentraland/homesteadio-dapps#translation) module.
 
 ### Usage
 
@@ -1061,7 +1061,7 @@ This is an example of a `SomePage` component that uses the `<Footer>` container:
 import * as React from 'react'
 
 import { Container } from 'decentraland-ui'
-import Navbar from 'decentraland-dapps/dist/containers/Navbar'
+import Navbar from 'homesteadio-dapps/dist/containers/Navbar'
 
 import './SomePage.css'
 
@@ -1084,7 +1084,7 @@ This `<Footer>` will show only English and Spanish as the options in the languag
 
 ### i18n
 
-If you are using the [Translation](https://github.com/decentraland/decentraland-dapps#translation) module, the `Footer` contatiner comes with support for the 6 languages supported by the library.
+If you are using the [Translation](https://github.com/decentraland/homesteadio-dapps#translation) module, the `Footer` contatiner comes with support for the 6 languages supported by the library.
 
 ### Advanced Usage
 
@@ -1128,7 +1128,7 @@ The `<SignInPage>` container can be used in the same way as the `<SignIn>` compo
 
 ### Dependencies
 
-This container requires you to install the [Wallet](https://github.com/decentraland/decentraland-dapps#wallet). It also has support for i18n out of the box if you include the [Translation](https://github.com/decentraland/decentraland-dapps#translation) module.
+This container requires you to install the [Wallet](https://github.com/decentraland/homesteadio-dapps#wallet). It also has support for i18n out of the box if you include the [Translation](https://github.com/decentraland/homesteadio-dapps#translation) module.
 
 ### Usage
 
@@ -1138,7 +1138,7 @@ You can import the `<SignInPage>` container and use it on your routes:
 import * as React from 'react'
 import { Switch, Route } from 'react-router-dom'
 
-import SignInPage from 'decentraland-dapps/dist/containers/SignInPage'
+import SignInPage from 'homesteadio-dapps/dist/containers/SignInPage'
 
 //...
 
@@ -1151,7 +1151,7 @@ import SignInPage from 'decentraland-dapps/dist/containers/SignInPage'
 
 ### i18n
 
-If you are using the [Translation](https://github.com/decentraland/decentraland-dapps#translation) module, the `SignInPage` contatiner comes with support for the 6 languages supported by the library.
+If you are using the [Translation](https://github.com/decentraland/homesteadio-dapps#translation) module, the `SignInPage` contatiner comes with support for the 6 languages supported by the library.
 
 ### Advanced Usage
 
@@ -1185,13 +1185,13 @@ Say you want to override some translations in English, just include any or all o
 
 ## Modal
 
-The `<Modal>` it's a shorthand for some common features used by modals provided to [ModalProvider](https://github.com/decentraland/decentraland-dapps#modal).
+The `<Modal>` it's a shorthand for some common features used by modals provided to [ModalProvider](https://github.com/decentraland/homesteadio-dapps#modal).
 
 ### Usage
 
 ```tsx
 import * as React from 'react'
-import Modal from 'decentraland-dapps/dist/containers/Modal'
+import Modal from 'homesteadio-dapps/dist/containers/Modal'
 
 export default class MyComponent extends React.PureComponent {
   render() {
@@ -1224,13 +1224,13 @@ The `<EtherscanLink>` can be used to link a transaction hash to Etherscan.io, an
 
 ### Dependencies
 
-This container requires you to install the [Wallet](https://github.com/decentraland/decentraland-dapps#wallet) module
+This container requires you to install the [Wallet](https://github.com/decentraland/homesteadio-dapps#wallet) module
 
 ### Usage
 
 ```tsx
 import * as React from 'react'
-import EtherscanLink from 'decentraland-dapps/dist/containers/EtherscanLink'
+import EtherscanLink from 'homesteadio-dapps/dist/containers/EtherscanLink'
 
 export default class MyComponent extends React.PureComponent {
   render() {
@@ -1255,7 +1255,7 @@ The `<Intercom>` will add an [intercom](https://www.intercom.com/) widget to you
 
 ```tsx
 import * as React from 'react'
-import Intercom from 'decentraland-dapps/dist/components/Intercom'
+import Intercom from 'homesteadio-dapps/dist/components/Intercom'
 
 export default class MyComponent extends React.PureComponent {
   render() {
